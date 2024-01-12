@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+    <form th:action="@{/login}" th:object="${participant}" method="post">
+        <label for="firstName">Prénom :</label>
+        <input type="text" id="firstName" th:field="*{firstName}" required />
+
+        <label for="lastName">Nom :</label>
+        <input type="text" id="lastName" th:field="*{lastName}" required />
+
+        <label for="emailAdress">Adresse email :</label>
+        <input type="text" id="emailAdress" th:field="*{emailAdress}" required />
+
+        <label for="organisation">Organisation :</label>
+        <input type="text" id="organisation" th:field="*{organisation}" />
+
+        <label for="observations">Observations éventuelles :</label>
+        <input type="text" id="observations" th:field="*{observations}" />
+
+        <button type="submit">Se connecter</button>
+    </form>
+
+</body>
+</html>
