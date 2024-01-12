@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liste des Auteurs</title>
+</head>
+<body>
+
+<h2>Liste des Auteurs</h2>
+
+<table border="1">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Nom</th>
+        <th>Prénom</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="author : ${authors}">
+        <td th:text="${author.id}"></td>
+        <td th:text="${author.lastName}"></td>
+        <td th:text="${author.firstName}"></td>
+
+    </tr>
+    </tbody>
+</table>
+
+<p>Ajouter un auteur : <a href="/authors/add">here</a></p>
+<p>Accueil: <a href="/">ici</a></p>
+
+</body>
+</html>

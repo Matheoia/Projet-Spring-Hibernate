@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Article Page</title>
+</head>
+<body>
+
+<h1>Article Details</h1>
+
+<div th:if="${myarticle}">
+    <p>Title: <span th:text="${myarticle.title}"></span></p>
+    <p>Content: <span th:text="${myarticle.content}"></span></p>
+
+    <h2>Author Details</h2>
+    <p>Author: <span th:text="${myarticle.author.firstName} + ' ' + ${myarticle.author.lastName}"></span></p>
+</div>
+
+<p>Retourner aux articles : <a href="/articles">ici</a></p>
+
+</body>
+</html>
