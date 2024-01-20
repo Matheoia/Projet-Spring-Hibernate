@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/header.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/form.css}" />
+</head>
+<body>
+
+    <header>
+        <button class="redirect" onclick="window.location.href='/home'">Home</button>
+        <div>
+            <button class="redirect" onclick="window.location.href='/users'">Users</button>
+            <button class="redirect" onclick="window.location.href='/events'">Events</button>
+        </div>
+        <div th:if="${user}" id="userAuthenticated">
+            <a class="redirect" th:href="@{/users/{id}(id=${user.id})}" th:text="${user.firstName} + ' ' + ${user.lastName}"></a>
+            <button class="redirect" onclick="window.location.href='/logout'">Logout</button>
+        </div>
+        <div th:unless="${user}" id="userNotAuthenticated">
+            <button class="redirect" onclick="window.location.href='/home/signUp'">Inscription</button>
+            <button class="redirect" onclick="window.location.href='/home/signIn'">Connexion</button>
+        </div>
+    </header>
+
+    <form th:action="@{/home/signUp}" th:object="${participant}" method="post">
+        <label for="firstName">Prénom :</label>
+        <input type="text" id="firstName" th:field="*{firstName}" required />
+
+        <label for="lastName">Nom :</label>
+        <input type="text" id="lastName" th:field="*{lastName}" required />
+
+        <label for="email">Adresse email :</label>
+        <input type="email" id="email" th:field="*{email}" />
+
+        <label for="password">Mot de passe :</label>
+        <input type="password" id="password" th:field="*{password}" required />
+
+        <label for="organisation">Organisation :</label>
+        <input type="text" id="organisation" th:field="*{organisation}" />
+
+        <label for="observations">Observations éventuelles :</label>
+        <input type="text" id="observations" th:field="*{observations}" />
+
+        <button class="btn-form" type="submit">Inscription</button>
+    </form>
+
+    <div th:if="${error}" class="error-message">
+        <p th:text="${error}"></p>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/header.css}" />
+</head>
+<body>
+
+    <header>
+        <button class="redirect" onclick="window.location.href='/home'">Home</button>
+        <div>
+            <button class="redirect" onclick="window.location.href='/users'">Users</button>
+            <button class="redirect" onclick="window.location.href='/events'">Events</button>
+        </div>
+        <div th:if="${user}" id="userAuthenticated">
+            <a class="redirect" th:href="@{/users/{id}(id=${user.id})}" th:text="${user.firstName} + ' ' + ${user.lastName}"></a>
+            <button class="redirect" onclick="window.location.href='/logout'">Logout</button>
+        </div>
+        <div th:unless="${user}" id="userNotAuthenticated">
+            <button class="redirect" onclick="window.location.href='/home/signUp'">Inscription</button>
+            <button class="redirect" onclick="window.location.href='/home/signIn'">Connexion</button>
+        </div>
+    </header>
+
+
+    <div th:if="${myEvent}">
+        <h1>Title: <span th:text="${myEvent.title}"></span></h1>
+        <p>Content: <span th:text="${myEvent.description}"></span></p>
+
+        <h5>Organisateur : <a th:href="@{/users/{id}(id=${myEvent.organizer.id})}" th:text="${myEvent.organizer.firstName} + ' ' + ${myEvent.organizer.lastName}"></a></h5>
+    </div>
+
+    <div>
+        <h3>Participants</h3>
+        <ul>
+            <li th:each="participant : ${participants}">
+                <a th:href="@{/users/{id}(id=${participant.id})}" th:text="${participant.firstName} + ' ' + ${participant.lastName}"></a>
+            </li>
+        </ul>
+    </div>
+
+    <div th:if="${event}">
+        <a th:href="@{/events/{id}/inscr(id=${event.id})}">S'inscrire ici</a>
+    </div>
+
+</body>
+</html>
