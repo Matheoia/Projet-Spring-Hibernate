@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>OneProfile</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/header.css}" />
+</head>
+<body>
+
+    <header>
+        <button class="redirect" onclick="window.location.href='/home'">Home</button>
+        <div>
+            <button class="redirect" onclick="window.location.href='/users'">Users</button>
+            <button class="redirect" onclick="window.location.href='/events'">Events</button>
+        </div>
+        <div th:if="${user}" id="userAuthenticated">
+            <a class="redirect" th:href="@{/users/{id}(id=${user.id})}" th:text="${user.firstName} + ' ' + ${user.lastName}"></a>
+            <button class="redirect" onclick="window.location.href='/logout'">Logout</button>
+        </div>
+        <div th:unless="${user}" id="userNotAuthenticated">
+            <button class="redirect" onclick="window.location.href='/home/signUp'">Inscription</button>
+            <button class="redirect" onclick="window.location.href='/home/signIn'">Connexion</button>
+        </div>
+    </header>
+
+    <div th:if="${visitedUser}" id="oneProfile">
+        <h1>Profil de : </h1>
+        <div th:text="${visitedUser.firstName} + ' ' + ${visitedUser.lastName}"></div>
+
+        <div th:if="${createdEvents}">
+            <h2>Propose :</h2>
+            <ul>
+                <li th:each="event : ${createdEvents}">
+                    <a th:href="@{/events/{id}(id=${event.id})}" th:text="${event.title}"></a>
+                </li>
+            </ul>
+        </div>
+        <div th:if="${registeredEvents}">
+            <h2>Inscrit à :</h2>
+            <ul>
+                <li th:each="event : ${registeredEvents}">
+                    <a th:href="@{/events/{id}(id=${event.id})}" th:text="${event.title}"></a>
+                </li>
+            </ul>
+        </div>
+        <div th:if="${inviteEvents}">
+            <h2>Invité à :</h2>
+            <ul>
+                <li th:each="inviteEvent : ${inviteEvents}">
+                    <a th:href="@{/events/{id}(id=${inviteEvent.event.id})}" th:text="${inviteEvent.event.title}"></a>
+                </li>
+            </ul>
+        </div>
+
+    </div>
+    <div th:unless="${visitedUser}">
+        <h1>Mon profil : </h1>
+        <div th:if="${user}" id="myProfile">
+            <div th:text="${user.firstName} + ' ' + ${user.lastName}"></div>
+        </div>
+
+        <div th:if="${createdEvents}">
+            <h2>Propose :</h2>
+            <ul>
+                <li th:each="event : ${createdEvents}">
+                    <a th:href="@{/events/{id}(id=${event.id})}" th:text="${event.title}"></a>
+                    <a th:href="@{/events/{id}/cancel(id=${event.id})}">Annuler</a>
+                </li>
+            </ul>
+        </div>
+
+        <div th:if="${registeredEvents}">
+            <h2>Inscrit à :</h2>
+            <ul>
+                <li th:each="event : ${registeredEvents}">
+                    <a th:href="@{/events/{id}(id=${event.id})}" th:text="${event.title}"></a>
+                    <a th:href="@{/events/{id}/cancelInscr(id=${event.id})}">Désinscire</a>
+                </li>
+            </ul>
+        </div>
+        <div th:if="${inviteEvents}">
+            <h2>Invité à :</h2>
+            <ul>
+                <li th:each="inviteEvent : ${inviteEvents}">
+                    <a th:href="@{/events/{id}(id=${inviteEvent.event.id})}" th:text="${inviteEvent.event.title}"></a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+
+</body>
+</html>
