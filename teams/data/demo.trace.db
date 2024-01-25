@@ -1,6 +1,0 @@
-2024-01-12 10:42:04.193192+01:00 jdbc[3]: exception
-org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "EVENEMENT" not found (this database is empty); SQL statement:
-select e1_0.id,e1_0.date,e1_0.nom from evenement e1_0 [42104-224]
-2024-01-12 11:27:00.378204+01:00 jdbc[3]: exception
-org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "EVENEMENT" not found (this database is empty); SQL statement:
-INSERT INTO EVENEMENT (DATE, NOM) VALUES ('2022-01-12', 'Événement 1') [42104-224]
